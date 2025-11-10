@@ -1,18 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamohamm <pamohamm@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/10 18:04:53 by pamohamm          #+#    #+#             */
+/*   Updated: 2025/11/10 20:58:32 by pamohamm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft/libft.h"
 
-int	ft_printf(const	char *fmt, ...)
+int	ft_printf(const	char *str, ...)
 {
-	int  i;
-	va_list params;
-	va_list params_copy;
-	va_start(params, fmt);
-	va_copy(params_copy, params);
+	int	i;
+	int	final_len;
 	
+	va_list	args;
+	va_start(args, str);
 	i = 0;
-	return (0);
+	final_len = 0;
+	while (str[i])
+	{
+		// if (str[i])
+		if (str[i] == '%' && ft_strchr("cspdiuxX%", str[i + 1]))
+		{
+			// final_len += (int)write(1, '%', 1); 
+			i++;
+		}
+		i++;
+	}
+	va_end(args);
+	// i = (int)write(1, "12345\n", 6);
+	return (i);
 }
 
+// int	main(void)
+// {
+// 	int	syst;
+// 	int	myft;
+
+// 	myft = ft_printf("12345\n");
+// 	syst = printf("12345\n");
+// 	printf("ft: %d	vs	sys: %d\n", myft, syst);
+
+// 	return (0);
+// }
+
+
+//learning more about stdarg.h
 void foo(char *fmt, ...)
 {
 	va_list ap, ap2;
@@ -43,3 +81,28 @@ void foo(char *fmt, ...)
 	// ...
 	va_end(ap2);
 }
+
+
+// another example of stdarg
+// int	sum(int count, ...)
+// {
+// 	va_list	args;
+// 	int		total;
+// 	int		i;
+
+// 	total = 0;
+// 	va_start(args, count);
+// 	i = 0;
+// 	while (i < count)
+// 	{
+// 		total += va_arg(args, int);
+// 		i++;
+// 	}
+// 	va_end(args);
+// 	return (total);
+// }
+
+// int	main(void)
+// {
+// 	printf("%d\n", sum(4, 2, 4, 6, 8));
+// }
